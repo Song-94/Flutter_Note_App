@@ -14,15 +14,11 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-NoteState _$NoteStateFromJson(Map<String, dynamic> json) {
-  return _NoteState.fromJson(json);
-}
-
 /// @nodoc
 mixin _$NoteState {
   List<Note> get notes => throw _privateConstructorUsedError;
+  NoteOrder get noteOrder => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $NoteStateCopyWith<NoteState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -33,7 +29,9 @@ abstract class $NoteStateCopyWith<$Res> {
   factory $NoteStateCopyWith(NoteState value, $Res Function(NoteState) then) =
       _$NoteStateCopyWithImpl<$Res, NoteState>;
   @useResult
-  $Res call({List<Note> notes});
+  $Res call({List<Note> notes, NoteOrder noteOrder});
+
+  $NoteOrderCopyWith<$Res> get noteOrder;
 }
 
 /// @nodoc
@@ -50,13 +48,26 @@ class _$NoteStateCopyWithImpl<$Res, $Val extends NoteState>
   @override
   $Res call({
     Object? notes = null,
+    Object? noteOrder = null,
   }) {
     return _then(_value.copyWith(
       notes: null == notes
           ? _value.notes
           : notes // ignore: cast_nullable_to_non_nullable
               as List<Note>,
+      noteOrder: null == noteOrder
+          ? _value.noteOrder
+          : noteOrder // ignore: cast_nullable_to_non_nullable
+              as NoteOrder,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $NoteOrderCopyWith<$Res> get noteOrder {
+    return $NoteOrderCopyWith<$Res>(_value.noteOrder, (value) {
+      return _then(_value.copyWith(noteOrder: value) as $Val);
+    });
   }
 }
 
@@ -67,7 +78,10 @@ abstract class _$$_NoteStateCopyWith<$Res> implements $NoteStateCopyWith<$Res> {
       __$$_NoteStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Note> notes});
+  $Res call({List<Note> notes, NoteOrder noteOrder});
+
+  @override
+  $NoteOrderCopyWith<$Res> get noteOrder;
 }
 
 /// @nodoc
@@ -82,23 +96,26 @@ class __$$_NoteStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? notes = null,
+    Object? noteOrder = null,
   }) {
     return _then(_$_NoteState(
       notes: null == notes
           ? _value._notes
           : notes // ignore: cast_nullable_to_non_nullable
               as List<Note>,
+      noteOrder: null == noteOrder
+          ? _value.noteOrder
+          : noteOrder // ignore: cast_nullable_to_non_nullable
+              as NoteOrder,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_NoteState implements _NoteState {
-  _$_NoteState({required final List<Note> notes}) : _notes = notes;
 
-  factory _$_NoteState.fromJson(Map<String, dynamic> json) =>
-      _$$_NoteStateFromJson(json);
+class _$_NoteState implements _NoteState {
+  _$_NoteState({required final List<Note> notes, required this.noteOrder})
+      : _notes = notes;
 
   final List<Note> _notes;
   @override
@@ -108,8 +125,11 @@ class _$_NoteState implements _NoteState {
   }
 
   @override
+  final NoteOrder noteOrder;
+
+  @override
   String toString() {
-    return 'NoteState(notes: $notes)';
+    return 'NoteState(notes: $notes, noteOrder: $noteOrder)';
   }
 
   @override
@@ -117,36 +137,31 @@ class _$_NoteState implements _NoteState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_NoteState &&
-            const DeepCollectionEquality().equals(other._notes, _notes));
+            const DeepCollectionEquality().equals(other._notes, _notes) &&
+            (identical(other.noteOrder, noteOrder) ||
+                other.noteOrder == noteOrder));
   }
 
-  @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_notes));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_notes), noteOrder);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$_NoteStateCopyWith<_$_NoteState> get copyWith =>
       __$$_NoteStateCopyWithImpl<_$_NoteState>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_NoteStateToJson(
-      this,
-    );
-  }
 }
 
 abstract class _NoteState implements NoteState {
-  factory _NoteState({required final List<Note> notes}) = _$_NoteState;
-
-  factory _NoteState.fromJson(Map<String, dynamic> json) =
-      _$_NoteState.fromJson;
+  factory _NoteState(
+      {required final List<Note> notes,
+      required final NoteOrder noteOrder}) = _$_NoteState;
 
   @override
   List<Note> get notes;
+  @override
+  NoteOrder get noteOrder;
   @override
   @JsonKey(ignore: true)
   _$$_NoteStateCopyWith<_$_NoteState> get copyWith =>

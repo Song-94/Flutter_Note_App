@@ -7,6 +7,8 @@ import 'package:note_app/presentation/add_edit_note/add_edit_note_view_model.dar
 import 'package:note_app/ui/colors.dart';
 import 'package:provider/provider.dart';
 
+import 'add_edit_note_ui_event.dart';
+
 class AddEditNoteScreen extends StatefulWidget {
   final Note? note;
 
@@ -41,7 +43,8 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
 
     Future.microtask(() {
       final viewModel = context.read<AddEditNoteViewModel>();
-      _streamSubscription = viewModel.eventStream.listen((event) {
+      _streamSubscription =
+          viewModel.eventStream.listen((AddEditNoteUiEvent event) {
         event.when(
           saveNote: () {
             Navigator.pop(context, true);
