@@ -1,11 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:note_app/domain/model/note.dart';
 import 'package:note_app/presentation/add_edit_note/add_edit_note_event.dart';
 import 'package:note_app/presentation/add_edit_note/add_edit_note_view_model.dart';
 import 'package:note_app/ui/colors.dart';
 import 'package:provider/provider.dart';
 
 class AddEditNoteScreen extends StatefulWidget {
-  const AddEditNoteScreen({Key? key}) : super(key: key);
+  final Note? note;
+
+  const AddEditNoteScreen({Key? key, this.note}) : super(key: key);
 
   @override
   State<AddEditNoteScreen> createState() => _AddEditNoteScreenState();
@@ -14,6 +19,7 @@ class AddEditNoteScreen extends StatefulWidget {
 class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
+  StreamSubscription? _streamSubscription;
 
   final List<Color> noteColors = [
     roseBud,
@@ -24,7 +30,34 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   ];
 
   @override
+  void initState() {
+    // initState 안에 서는 .watch 가 아닌 항상 .read 로 부모 클래스를 사용해야 함.
+    super.initState();
+
+    if (widget.note != null) {
+      _titleController.text = widget.note!.title;
+      _contentController.text = widget.note!.content;
+    }
+
+    Future.microtask(() {
+      final viewModel = context.read<AddEditNoteViewModel>();
+      _streamSubscription = viewModel.eventStream.listen((event) {
+        event.when(
+          saveNote: () {
+            Navigator.pop(context, true);
+          },
+          showSnackBar: (String message) {
+            final snackBar = SnackBar(content: Text(message));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
+        );
+      });
+    });
+  }
+
+  @override
   void dispose() {
+    _streamSubscription?.cancel();
     _titleController.dispose();
     _contentController.dispose();
     super.dispose();
@@ -33,10 +66,17 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<AddEditNoteViewModel>();
-
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          viewModel.onEvent(
+            AddEditNoteEvent.saveNote(
+              (widget.note == null) ? null : widget.note!.id,
+              _titleController.text,
+              _contentController.text,
+            ),
+          );
+        },
         child: const Icon(Icons.save),
       ),
       body: AnimatedContainer(
@@ -69,6 +109,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
                   .toList(),
             ),
             TextField(
+              controller: _titleController,
               maxLines: 1,
               style: Theme.of(context).textTheme.headline5!.copyWith(
                     color: darkGray,
@@ -79,6 +120,7 @@ class _AddEditNoteScreenState extends State<AddEditNoteScreen> {
               ),
             ),
             TextField(
+              controller: _contentController,
               maxLines: null,
               style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     color: darkGray,

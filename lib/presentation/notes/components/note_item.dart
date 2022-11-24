@@ -6,7 +6,7 @@ class NoteItem extends StatelessWidget {
   final Note note;
   final Function? onDeleteTap;
 
-  NoteItem({
+  const NoteItem({
     Key? key,
     required this.note,
     this.onDeleteTap,

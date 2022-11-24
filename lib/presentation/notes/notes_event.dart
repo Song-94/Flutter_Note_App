@@ -8,5 +8,4 @@ abstract class NotesEvent<T> with _$NotesEvent<T> {
   const factory NotesEvent.loadNotes() = LoadNotes;
   const factory NotesEvent.deleteNote(Note note) = DeleteNote;
   const factory NotesEvent.restoreNote() = RestoreNote;
-
 }
