@@ -4,7 +4,7 @@ import 'package:note_app/domain/model/note.dart';
 import 'package:note_app/domain/use_case/use_cases.dart';
 import 'package:note_app/domain/util/note_order.dart';
 import 'package:note_app/domain/util/order_type.dart';
-import 'package:note_app/presentation/notes/note_state.dart';
+import 'package:note_app/presentation/notes/notes_state.dart';
 import 'package:note_app/presentation/notes/notes_event.dart';
 
 class NotesViewModel with ChangeNotifier {
@@ -13,6 +13,7 @@ class NotesViewModel with ChangeNotifier {
   NoteState _state = NoteState(
     notes: [],
     noteOrder: const NoteOrder.date(OrderType.descending()),
+    isOrderSectionVisible: false,
   );
 
   NoteState get state => _state;
@@ -30,6 +31,18 @@ class NotesViewModel with ChangeNotifier {
       loadNotes: _loadNotes,
       deleteNote: _deleteNote,
       restoreNote: _restoreNote,
+      changeOrder: (NoteOrder noteOrder) {
+        _state = state.copyWith(
+          noteOrder: noteOrder,
+        );
+        _loadNotes();
+      },
+      toggleOrderSection: () {
+        _state = state.copyWith(
+          isOrderSectionVisible: !state.isOrderSectionVisible,
+        );
+        notifyListeners();
+      },
     );
   }
 

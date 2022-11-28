@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/di/provider_setup.dart';
-import 'package:note_app/presentation/notes/note_screen.dart';
+import 'package:note_app/presentation/notes/notes_screen.dart';
 import 'package:note_app/ui/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        unselectedWidgetColor: Colors.white,
         // primarySwatch : 전체적인 컬러 구성 배치
         primaryColor: Colors.white,
         backgroundColor: darkGray,
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
                 ),
         appBarTheme: Theme.of(context).appBarTheme.copyWith(
               backgroundColor: darkGray,
+            ),
+        textTheme: Theme.of(context).textTheme.apply(
+              bodyColor: Colors.white,
             ),
       ),
       home: const NoteScreen(),

@@ -22,8 +22,8 @@ Note _$NoteFromJson(Map<String, dynamic> json) {
 mixin _$Note {
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
-  int get color => throw _privateConstructorUsedError;
   int get timestamp => throw _privateConstructorUsedError;
+  int get color => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $NoteCopyWith<$Res> {
   factory $NoteCopyWith(Note value, $Res Function(Note) then) =
       _$NoteCopyWithImpl<$Res, Note>;
   @useResult
-  $Res call({String title, String content, int color, int timestamp, int? id});
+  $Res call({String title, String content, int timestamp, int color, int? id});
 }
 
 /// @nodoc
@@ -54,8 +54,8 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
   $Res call({
     Object? title = null,
     Object? content = null,
-    Object? color = null,
     Object? timestamp = null,
+    Object? color = null,
     Object? id = freezed,
   }) {
     return _then(_value.copyWith(
@@ -67,13 +67,13 @@ class _$NoteCopyWithImpl<$Res, $Val extends Note>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      color: null == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as int,
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
+              as int,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
               as int,
       id: freezed == id
           ? _value.id
@@ -89,7 +89,7 @@ abstract class _$$_NoteCopyWith<$Res> implements $NoteCopyWith<$Res> {
       __$$_NoteCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String content, int color, int timestamp, int? id});
+  $Res call({String title, String content, int timestamp, int color, int? id});
 }
 
 /// @nodoc
@@ -103,8 +103,8 @@ class __$$_NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res, _$_Note>
   $Res call({
     Object? title = null,
     Object? content = null,
-    Object? color = null,
     Object? timestamp = null,
+    Object? color = null,
     Object? id = freezed,
   }) {
     return _then(_$_Note(
@@ -116,13 +116,13 @@ class __$$_NoteCopyWithImpl<$Res> extends _$NoteCopyWithImpl<$Res, _$_Note>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      color: null == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as int,
       timestamp: null == timestamp
           ? _value.timestamp
           : timestamp // ignore: cast_nullable_to_non_nullable
+              as int,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
               as int,
       id: freezed == id
           ? _value.id
@@ -138,8 +138,8 @@ class _$_Note implements _Note {
   _$_Note(
       {required this.title,
       required this.content,
-      required this.color,
       required this.timestamp,
+      required this.color,
       this.id});
 
   factory _$_Note.fromJson(Map<String, dynamic> json) => _$$_NoteFromJson(json);
@@ -149,15 +149,15 @@ class _$_Note implements _Note {
   @override
   final String content;
   @override
-  final int color;
-  @override
   final int timestamp;
+  @override
+  final int color;
   @override
   final int? id;
 
   @override
   String toString() {
-    return 'Note(title: $title, content: $content, color: $color, timestamp: $timestamp, id: $id)';
+    return 'Note(title: $title, content: $content, timestamp: $timestamp, color: $color, id: $id)';
   }
 
   @override
@@ -167,16 +167,16 @@ class _$_Note implements _Note {
             other is _$_Note &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
-            (identical(other.color, color) || other.color == color) &&
             (identical(other.timestamp, timestamp) ||
                 other.timestamp == timestamp) &&
+            (identical(other.color, color) || other.color == color) &&
             (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, title, content, color, timestamp, id);
+      Object.hash(runtimeType, title, content, timestamp, color, id);
 
   @JsonKey(ignore: true)
   @override
@@ -196,8 +196,8 @@ abstract class _Note implements Note {
   factory _Note(
       {required final String title,
       required final String content,
-      required final int color,
       required final int timestamp,
+      required final int color,
       final int? id}) = _$_Note;
 
   factory _Note.fromJson(Map<String, dynamic> json) = _$_Note.fromJson;
@@ -207,9 +207,9 @@ abstract class _Note implements Note {
   @override
   String get content;
   @override
-  int get color;
-  @override
   int get timestamp;
+  @override
+  int get color;
   @override
   int? get id;
   @override
