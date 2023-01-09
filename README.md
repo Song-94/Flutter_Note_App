@@ -1,4 +1,5 @@
 # note_app
+- The output is in the samples folder
 
 # tip
 
